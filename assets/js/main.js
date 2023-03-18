@@ -1,3 +1,9 @@
+var timeLeftEl = document.querySelector('#timeLeft');
+var headingEl = document.querySelector('#hesding');
+var contentEl = document.querySelector('#content');
+var startBtnEl = document.querySelector('#start');
+var timer;
+
 var question = [
     {
         title:
@@ -34,6 +40,9 @@ var question = [
 
 ];
 
+var timeLeft = 60;
+var indexOfCurrentQuestion = 0;
+
 function renderNextQuestion(question) {
     document.querySelector('main').innerHTML = '';
     
@@ -54,3 +63,36 @@ function renderNextQuestion(question) {
 
 renderNextQuestion(question[0]);
 renderNextQuestion(question[1]);
+renderNextQuestion(question[2]);
+renderNextQuestion(question[3]);
+renderNextQuestion(question[4]);
+
+startBtnEl.addEventListener('click', function (event) {
+    event.preventDefault();
+
+    timer = setInterval(function () {
+        timeLeft--;
+        timeLeftEl.textContent = timeLeft;
+        
+        if (timeLeft === 0) {
+            //TODO Build the rest of game logic
+            clearInterval(timer);
+        }
+    }, 100);
+});
+
+/*function setTime() {
+    let timerInterval = setInterval(function () {
+        secondsLeft--;
+        time.textContent = `Time:${secondsLeft}s`;
+
+        if (secondsLeft === 0 || questionCount === questions.length) {
+            clearInterval(timerInterval);
+            questionsEl.style.display = "none";
+            finalEl.style.display = "block";
+            score.textContent = secondsLeft;
+        }
+    }, 1000);
+}
+
+setTime();*/
