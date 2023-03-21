@@ -1,4 +1,109 @@
-body {
-    justify-content: center;
-    background-color: #0891ec;
+* {
+    box-sizing: border-box;
+  }
+  
+  
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  header {
+    background-color: #4083e0;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    position: sticky;
+    top: 0;
+  }
+  
+  header p {
+    margin: 0;
+  }
+  
+  
+  #viewHighScoresBtn {
+    background-color: #074db6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+  
+  #viewHighscoresBtn:hover {
+    background-color: white;
+    color: #074db6;
+  }
+  
+  
+  #timerTag {
+    font-weight: bold;
+  }
+  
+  
+  main {
+    margin: 20px;
+  }
+  
+  h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+  }
+  
+  #content {
+    background-color: #4083e0;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  #content p {
+    font-size: 20px;
+    margin-bottom: 20px;
+  }
+  
+  #start {
+    background-color: #074db6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    padding: 10px 20px;
+  }
+  
+  #start:hover {
+    background-color: white;
+    color: #074db6;
+  }
+  
+  
+  .choices {
+    background-color: white;
+    border: none;
+    border-radius: 10px;
+    color: #074db6;
+    cursor: pointer;
+    display: block;
+    font-size: 20px;
+    margin-bottom: 10px;
+    padding: 10px 20px;
+    text-align: left;
+    width: 100%;
+  }
+  
+  .choices:hover {
+    background-color: #074db6;
+    color: white;
+  }
+  
+#restart {
+  background-color: #074db6;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 10px 20px;
 }

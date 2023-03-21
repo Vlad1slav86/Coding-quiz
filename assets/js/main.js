@@ -1,10 +1,10 @@
-var timeLeftEl = document.querySelector('#timeLeft');
-var headingEl = document.querySelector('#hesding');
-var contentEl = document.querySelector('#content');
-var startBtnEl = document.querySelector('#start');
-var timer;
+const timeLeftEl = document.querySelector('#timeLeft');
+const headingEl = document.querySelector('#heading');
+const contentEl = document.querySelector('#content');
+const startBtnEl = document.querySelector('#start');
+let timer;
 
-var question = [
+const questions = [
     {
         title:
             'A very useful tool used during development and debugging for printing content to the debugger is:',
@@ -36,63 +36,132 @@ var question = [
         answer: 'parentheses',
 
     }
-
-
 ];
 
-var timeLeft = 60;
-var indexOfCurrentQuestion = 0;
+let timeLeft = 60;
+let indexOfCurrentQuestion = 0;
+let currentScore = 0;
 
-function renderNextQuestion(question) {
-    document.querySelector('main').innerHTML = '';
-    
-    var questionContainerEl = document.createElement('div');
+function renderNextQuestion() {
+    contentEl.textContent = '';
+    const currentQuestion = questions[indexOfCurrentQuestion];
 
-    var titleEl = document.createElement('h2');
-    titleEl.textContent = question.title;
-    questionContainerEl.appendChild(titleEl);
+    headingEl.textContent = currentQuestion.title;
 
-    for (var i = 0; i < question.choices.length; i++) {
-        var optionEl = document.createElement('button');
-        optionEl.textContent = question.choices[i];
-        questionContainerEl.appendChild(optionEl);
+    const numChoices = currentQuestion.choices.length;
+    for (let i = 0; i < numChoices; i++) {
+        const buttonEl = document.createElement('button');
+        buttonEl.className = 'choices';
+        buttonEl.textContent = currentQuestion.choices[i];
+        contentEl.appendChild(buttonEl);
     }
-
-    document.querySelector('main').appendChild(questionContainerEl);
 }
 
-renderNextQuestion(question[0]);
-renderNextQuestion(question[1]);
-renderNextQuestion(question[2]);
-renderNextQuestion(question[3]);
-renderNextQuestion(question[4]);
+function displayHighScores() {
+    const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+    const highScoreList = document.querySelector('#high-score-list');
+    
+    // Clear any existing scores from the list
+    highScoreList.innerHTML = '';
+  
+    // Loop through each high score and add it to the list as a new list item
+    highScores.forEach(score => {
+      const listItem = document.createElement('li');
+      listItem.textContent = `${score.initials}: ${score.score}`;
+      highScoreList.appendChild(listItem);
+    });
+  }
+  
 
-startBtnEl.addEventListener('click', function (event) {
+function endGame() {
+    clearInterval(timer);
+    contentEl.innerHTML = '';
+
+    const resultEl = document.createElement('p');
+    resultEl.textContent = `Your final score is ${currentScore} out of ${questions.length}.`;
+    contentEl.appendChild(resultEl);
+
+    const formEl = document.createElement('form');
+    const labelEl = document.createElement('label');
+    labelEl.textContent = 'Enter your initials:';
+    const inputEl = document.createElement('input');
+    inputEl.setAttribute('type', 'text');
+    inputEl.setAttribute('maxlength', '3');
+    inputEl.setAttribute('size', '3');
+    const submitBtnEl = document.createElement('button');
+    submitBtnEl.textContent = 'Submit';
+    formEl.appendChild(labelEl);
+    formEl.appendChild(inputEl);
+    formEl.appendChild(submitBtnEl);
+    contentEl.appendChild(formEl);
+
+    submitBtnEl.addEventListener('click', (event) => {
+        event.preventDefault();
+        const initials = inputEl.value.toUpperCase();
+        if (initials) {
+            const highScores = JSON.parse(localStorage.getItem('highScores')) || [];
+            highScores.push({ initials, score: currentScore });
+            highScores.sort((a, b) => b.score - a.score);
+            highScores.splice(5);
+            localStorage.setItem('highScores', JSON.stringify(highScores));
+            displayHighScores();
+        }
+    });
+}
+
+
+startBtnEl.addEventListener('click', (event) => {
     event.preventDefault();
 
-    timer = setInterval(function () {
+    timer = setInterval(() => {
         timeLeft--;
         timeLeftEl.textContent = timeLeft;
-        
+
         if (timeLeft === 0) {
-            //TODO Build the rest of game logic
             clearInterval(timer);
-        }
-    }, 100);
-});
-
-/*function setTime() {
-    let timerInterval = setInterval(function () {
-        secondsLeft--;
-        time.textContent = `Time:${secondsLeft}s`;
-
-        if (secondsLeft === 0 || questionCount === questions.length) {
-            clearInterval(timerInterval);
-            questionsEl.style.display = "none";
-            finalEl.style.display = "block";
-            score.textContent = secondsLeft;
+            endGame();
         }
     }, 1000);
-}
 
-setTime();*/
+    renderNextQuestion();
+});
+
+contentEl.addEventListener('click', (event) => {
+    const currentQuestion = questions[indexOfCurrentQuestion];
+    event.preventDefault();
+
+    if (event.target.matches('.choices')) {
+        if (event.target.textContent === currentQuestion.answer) {
+            currentScore++;
+        } else {
+            timeLeft -= 10;
+        }
+
+        indexOfCurrentQuestion++;
+
+        if (indexOfCurrentQuestion >= questions.length) {
+            clearInterval(timer);
+            endGame();
+        } else {
+            renderNextQuestion();
+        }
+    } 
+});
+
+
+const restartBtnEl = document.querySelector('#restart');
+
+restartBtnEl.addEventListener('click', () => {
+  timeLeft = 60;
+  indexOfCurrentQuestion = 0;
+  currentScore = 0;
+  renderNextQuestion();
+  timer = setInterval(() => {
+    timeLeft--;
+    timeLeftEl.textContent = timeLeft;
+    if (timeLeft === 0) {
+      clearInterval(timer);
+      endGame();
+    }
+  }, 1000);
+});

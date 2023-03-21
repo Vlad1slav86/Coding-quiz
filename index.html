@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,17 +8,31 @@
     <title>Document</title>
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
+
+
+
 <body>
     <header>
-        <button id="viewHighscoresBtn">View Highscores</button> 
-        <p style="display: none">Time: <span id="timerTag">9999</span></p> 
-    Timer: <span id="timeLeft">0</span>
+        <button id="viewHighScoresBtn">View Highscores</button>
+        Timer: <span id="timeLeft">0</span>
     </header>
-    <h2 id="heading">Welcome to my code quiz</h2>
-    <main> 
-        
+    <main>
+        <h2 id="heading">Answer the following code-related questions within the time limit. Keep in mind that incorrect
+            answers will penalize your time by 10 seconds.</h2>
+
+        <div id="content">
+            <p>Please click start to begin quiz.</p>
+
+            <button id="start">Start Quiz</button>
+        </div>
+
+        <ul id="high-score-list"></ul>
+
+        <button id="restart">Restart</button>
     </main>
-<button id="start">Start Quiz</button>
+
+
     <script src="./assets/js/main.js"></script>
 </body>
+
 </html>
