@@ -1,23 +1,22 @@
-# Password-Generator
-
-This application uses Javascript to generate a random, secure password for the user.
+# Coding-quiz
+A Coding Quiz designed for students to test their knowlede of Javascript.
 
 ## Usage
 
-Click on the generate password button and answer the series of prompts. A random password will be generated every time with the parameters selected.
+Users should be able to:
 
-## Screenshot 
+- click the Start Quiz button to start the game.
+- click View high scores to check scores.
+- enter initials after the game is done.
+- click the Restart button to reset the game.
 
-![Password-Generator](./Assets/images/Screenshot%202023-03-13%20at%2010.42.17%20PM.png)
 
-Choose password length.
+### Screenshot
+![Initial page](./assets/images/Screenshot%202023-03-21%20at%202.45.53%20PM.png)
+![Answer Questions](./assets/images/Screenshot%202023-03-21%20at%202.46.12%20PM.png)
+![Enter Initials](./assets/images/Screenshot%202023-03-21%20at%202.46.29%20PM.png)
+![View High Scores](./assets/images/Screenshot%202023-03-21%20at%202.46.51%20PM.png)
+### Links
 
-![Password-length-promt](./Assets/images/Screenshot%202023-03-13%20at%2010.42.44%20PM.png)
-
-Choose type of characters.
-
-![Character-promt](./Assets/images/Screenshot%202023-03-13%20at%2010.42.59%20PM.png)
-
-## Application Link
-
-https://vlad1slav86.github.io/Password-Generator/
+- Github URL: [https://github.com/Vlad1slav86/Coding-quiz]
+- Live Site URL: [https://vlad1slav86.github.io/]
