@@ -6,7 +6,7 @@ A Coding Quiz designed for students to test their knowlede of Javascript.
 Users should be able to:
 
 - click the Start Quiz button to start the game.
-- click View high scores to check scores.
+- click View Highscores to check scores.
 - enter initials after the game is done.
 - click the Restart button to reset the game.
 
